@@ -1,0 +1,161 @@
+﻿mysql> use demo;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select * from list;
++------+-------+
+| id   | name  |
++------+-------+
+|    1 | Sneha |
+|    2 | Ram   |
+|    3 | Vijay |
+|    4 | Anu   |
+|    5 | Pooja |
++------+-------+
+5 rows in set (0.00 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> UPDATE list SET name="Siva" WHERE id=1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> insert into list values(6,"Deepak");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> DELETE from list WHERE id=2;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from list;
++------+--------+
+| id   | name   |
++------+--------+
+|    1 | Siva   |
+|    3 | Vijay  |
+|    4 | Anu    |
+|    5 | Pooja  |
+|    6 | Deepak |
++------+--------+
+5 rows in set (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> select * from list;
++------+-------+
+| id   | name  |
++------+-------+
+|    1 | Sneha |
+|    2 | Ram   |
+|    3 | Vijay |
+|    4 | Anu   |
+|    5 | Pooja |
++------+-------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE list SET name="Siva" WHERE id=1;
+Query OK, 1 row affected (0.18 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> insert into list values(6,"Deepak");
+Query OK, 1 row affected (0.16 sec)
+
+mysql> DELETE from list WHERE id=2;
+Query OK, 1 row affected (0.39 sec)
+
+mysql> select * from list;
++------+--------+
+| id   | name   |
++------+--------+
+|    1 | Siva   |
+|    3 | Vijay  |
+|    4 | Anu    |
+|    5 | Pooja  |
+|    6 | Deepak |
++------+--------+
+5 rows in set (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SATRT TRANSACTION;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SATRT TRANSACTION' at line 1
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SAVEPOINT initial;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO list values(7,"Aniket");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT ins;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> UPDATE list SET name="Anik" WHERE id=3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SAVEPOINT upd;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM list WHERE id=4;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT del;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT *FROM list;
++------+--------+
+| id   | name   |
++------+--------+
+|    1 | Siva   |
+|    3 | Anik   |
+|    5 | Pooja  |
+|    6 | Deepak |
+|    7 | Aniket |
++------+--------+
+5 rows in set (0.00 sec)
+
+mysql> ROLLBACK TO upd;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT *FROM list;
++------+--------+
+| id   | name   |
++------+--------+
+|    1 | Siva   |
+|    3 | Anik   |
+|    4 | Anu    |
+|    5 | Pooja  |
+|    6 | Deepak |
+|    7 | Aniket |
++------+--------+
+6 rows in set (0.00 sec)
+
+mysql> ROLLBACK TO del;
+ERROR 1305 (42000): SAVEPOINT del does not exist
+mysql> ROLLBACK TO ins;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT *FROM list;
++------+--------+
+| id   | name   |
++------+--------+
+|    1 | Siva   |
+|    3 | Vijay  |
+|    4 | Anu    |
+|    5 | Pooja  |
+|    6 | Deepak |
+|    7 | Aniket |
++------+--------+
+6 rows in set (0.00 sec)
+
+mysql> 
+
+

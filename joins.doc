@@ -1,0 +1,83 @@
+mysql> use demo;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table officers(officer_id int,officer_name varchar(20),address varchar(25));
+Query OK, 0 rows affected (1.15 sec)
+
+mysql> insert into officers values(1,"Ajith","Chennai"),(2,"Deepika","Lucknow"),(3,"Vimal","Bangalore"),(4,"Rahul","Mumbai");
+Query OK, 4 rows affected (0.16 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> create table students(student_id int,student_name varchar(20),course_name varchar(20));
+Query OK, 0 rows affected (1.73 sec)
+
+mysql> insert into students values(1,"Aryan","Java"),(2,"Rohini","Python"),(3,"Ladha","C");
+Query OK, 3 rows affected (0.15 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT officers.officer_name, officers.address, students.course_name  
+    -> FROM officers   
+    -> INNER JOIN students  
+    -> ON officers.officer_id = students.student_id;   
++--------------+-----------+-------------+
+| officer_name | address   | course_name |
++--------------+-----------+-------------+
+| Ajith        | Chennai   | Java        |
+| Deepika      | Lucknow   | Python      |
+| Vimal        | Bangalore | C           |
++--------------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from officers;
++------------+--------------+-----------+
+| officer_id | officer_name | address   |
++------------+--------------+-----------+
+|          1 | Ajith        | Chennai   |
+|          2 | Deepika      | Lucknow   |
+|          3 | Vimal        | Bangalore |
+|          4 | Rahul        | Mumbai    |
++------------+--------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select*from students;
++------------+--------------+-------------+
+| student_id | student_name | course_name |
++------------+--------------+-------------+
+|          1 | Aryan        | Java        |
+|          2 | Rohini       | Python      |
+|          3 | Ladha        | C           |
++------------+--------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT  officers.officer_name, officers.address, students.course_name  
+    -> FROM officers  
+    -> LEFT JOIN students  
+    -> ON officers.officer_id = students.student_id;  
++--------------+-----------+-------------+
+| officer_name | address   | course_name |
++--------------+-----------+-------------+
+| Ajith        | Chennai   | Java        |
+| Deepika      | Lucknow   | Python      |
+| Vimal        | Bangalore | C           |
+| Rahul        | Mumbai    | NULL        |
++--------------+-----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT officers.officer_name, officers.address, students.course_name, students.student_name  
+    -> FROM officers  
+    -> RIGHT JOIN students  
+    -> ON officers.officer_id = students.student_id;  
++--------------+-----------+-------------+--------------+
+| officer_name | address   | course_name | student_name |
++--------------+-----------+-------------+--------------+
+| Ajith        | Chennai   | Java        | Aryan        |
+| Deepika      | Lucknow   | Python      | Rohini       |
+| Vimal        | Bangalore | C           | Ladha        |
++--------------+-----------+-------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> 
+
+

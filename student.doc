@@ -1,0 +1,95 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.01 sec)
+
+mysql> create database student;
+Query OK, 1 row affected (0.18 sec)
+
+mysql> use student;
+Database changed
+mysql> create table details(id int,name varchar(15),dept varchar(10),yop int);
+Query OK, 0 rows affected (0.82 sec)
+
+mysql> insert into details values(1,"Priya","Mech",2019),(2,"Raj","Civil",2020),(3,"Mahi","EEE",2018);
+Query OK, 3 rows affected (0.23 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select*from details;
++------+-------+-------+------+
+| id   | name  | dept  | yop  |
++------+-------+-------+------+
+|    1 | Priya | Mech  | 2019 |
+|    2 | Raj   | Civil | 2020 |
+|    3 | Mahi  | EEE   | 2018 |
++------+-------+-------+------+
+3 rows in set (0.00 sec)
+
+mysql> TRUNCATE TABLE details;
+Query OK, 0 rows affected (1.76 sec)
+
+mysql> select*from details;
+Empty set (0.00 sec)
+
+mysql> insert into details values(1,"Priya","Mech",2019),(2,"Raj","Civil",2020),(3,"Mahi","EEE",2018);
+Query OK, 3 rows affected (0.14 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select*from details;
++------+-------+-------+------+
+| id   | name  | dept  | yop  |
++------+-------+-------+------+
+|    1 | Priya | Mech  | 2019 |
+|    2 | Raj   | Civil | 2020 |
+|    3 | Mahi  | EEE   | 2018 |
++------+-------+-------+------+
+3 rows in set (0.00 sec)
+
+mysql> DELETE FROM details WHERE id=1;
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select*from details;
++------+------+-------+------+
+| id   | name | dept  | yop  |
++------+------+-------+------+
+|    2 | Raj  | Civil | 2020 |
+|    3 | Mahi | EEE   | 2018 |
++------+------+-------+------+
+2 rows in set (0.00 sec)
+
+mysql> DELETE FROM details;
+Query OK, 2 rows affected (0.48 sec)
+
+mysql> select*from details;
+Empty set (0.00 sec)
+
+mysql> insert into details values(1,"Priya","Mech",2019),(2,"Raj","Civil",2020),(3,"Mahi","EEE",2018);
+Query OK, 3 rows affected (0.17 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select*from details;
++------+-------+-------+------+
+| id   | name  | dept  | yop  |
++------+-------+-------+------+
+|    1 | Priya | Mech  | 2019 |
+|    2 | Raj   | Civil | 2020 |
+|    3 | Mahi  | EEE   | 2018 |
++------+-------+-------+------+
+3 rows in set (0.00 sec)
+
+mysql> DROP TABLE details;
+Query OK, 0 rows affected (0.57 sec)
+
+mysql> select*from details;
+ERROR 1146 (42S02): Table 'student.details' doesn't exist
+mysql> insert into details values(1,"Priya","Mech",2019),(2,"Raj","Civil",2020),(3,"Mahi","EEE",2018);
+ERROR 1146 (42S02): Table 'student.details' doesn't exist
+mysql> 
+
+
